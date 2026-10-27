@@ -25,13 +25,22 @@
 .announcement { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 html { scrollbar-gutter: stable; }
 .split-catalog { overflow: visible; }
-.split-catalog .intro, .split-catalog main > .footnote, .split-catalog > .footer { display: none; }
+.split-catalog .intro, .split-catalog > .footer { display: none; }
 .split-catalog .catalog-workspace { display: grid; grid-template-columns: minmax(270px, 330px) minmax(0, 1fr); gap: 32px; min-height: calc(100dvh - 104px); align-items: start; }
 .split-catalog .catalog-browser { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; height: calc(100dvh - 128px); overflow: hidden; position: sticky; top: 24px; padding-right: 22px; border-right: 1px solid var(--line); }
 .split-catalog .rule-panel { grid-column: 2; grid-row: 1; min-height: calc(100dvh - 104px); padding-bottom: 60px; }
 .split-catalog .filters { position: static; flex: 0 0 auto; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; padding: 0 0 18px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; }
 .split-catalog .field:first-child { grid-column: 1 / -1; }
 .split-catalog .field input, .split-catalog .field select { min-height: 42px; padding: 8px 10px; font-size: 12px; }
+.split-catalog .field select {
+  appearance: none;
+  padding-right: 32px;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 15px center, right 10px center;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+.split-catalog .field :focus-visible { outline-offset: -3px; }
 .split-catalog .results { flex: 0 0 auto; padding: 12px 0; border-bottom: 1px solid var(--line); }
 .split-catalog .results > span:last-child { display: none; }
 .split-catalog .rule-list { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: none; padding: 6px 0 12px; border: 0; border-radius: 0; background: none; }
@@ -43,7 +52,12 @@ html { scrollbar-gutter: stable; }
 .split-catalog .rule h2 a { min-height: 20px; }
 .split-catalog .rule h2 span { display: none; }
 .split-catalog .rule code { font-size: 11px; }
-.split-catalog .rule p, .split-catalog .rule .category, .split-catalog .rule .set { display: none; }
+.split-catalog .rule p { font-size: 12px; line-height: 1.55; margin: 5px 0 8px; }
+.split-catalog .rule .category, .split-catalog .rule .set, .split-catalog .rule .research { display: inline-block; font-size: 10px; line-height: 1.5; padding: 2px 6px; margin: 0 4px 0 0; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); }
+.split-catalog .rule .research { color: var(--link); border-color: currentColor; }
+.catalog-version { display: flex; flex: 0 0 auto; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 12px; margin: auto 0 0; padding: 8px 0; border-top: 1px solid var(--line); font-size: 11px; line-height: 1.5; color: var(--muted); }
+.catalog-version a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.research-note { max-width: 49ch; font-size: 13px; line-height: 1.7; color: var(--muted); margin: 0 0 26px; }
 .split-catalog .rule:has(a[aria-current="true"]) { background: var(--surface); border-left-color: var(--link); border-radius: 0 8px 8px 0; }
 .split-catalog .rule a[aria-current="true"] { color: var(--link); }
 .split-catalog .rule-list::-webkit-scrollbar { display: none; }
@@ -78,6 +92,7 @@ html { scrollbar-gutter: stable; }
   .split-catalog .catalog-workspace { display: flex; flex-direction: column; gap: 0; }
   .split-catalog .catalog-browser { order: 1; width: 100%; position: static; height: auto; overflow: visible; padding: 0; border: 0; }
   .split-catalog .rule-list { flex: none; overflow: visible; mask-image: none; }
+  .split-catalog .field input, .split-catalog .field select { font-size: 16px; }
   .split-catalog .filters { position: sticky; top: 0; padding-top: 14px; background: var(--paper); }
   .split-catalog .rule-panel { width: 100%; }
   .split-catalog.is-reading .catalog-browser { display: none; }

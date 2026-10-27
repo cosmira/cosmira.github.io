@@ -1,6 +1,7 @@
 (() => {
-  const rawRoot = 'https://raw.githubusercontent.com/cosmira/soda/master/docs/rules/';
-  const githubRoot = 'https://github.com/cosmira/soda/blob/master/docs/rules/';
+  const revision = document.body.dataset.docsRevision;
+  const rawRoot = `https://raw.githubusercontent.com/cosmira/soda/${revision}/docs/rules/`;
+  const githubRoot = `https://github.com/cosmira/soda/blob/${revision}/docs/rules/`;
   const element = id => document.getElementById(id);
   const cache = new Map();
   const panel = element('rule-panel');
@@ -128,6 +129,7 @@
     if (first?.tagName === 'P') {
       if (first.firstChild?.nodeType === Node.TEXT_NODE) first.firstChild.textContent = first.firstChild.textContent.replace(/^[\s📝]+/u, '');
       element('summary').replaceChildren(...first.childNodes);
+      if (ruleIndex[id]?.summary) element('summary').textContent = ruleIndex[id].summary;
       element('summary').hidden = false;
       first.remove();
     }
@@ -150,11 +152,12 @@
           link.removeAttribute('href');
           return;
         }
-        const localRule = destination.origin === 'https://github.com' && destination.pathname.match(/^\/cosmira\/soda\/blob\/master\/docs\/rules\/([a-z][a-z0-9_]*)\.md$/);
+        const rulePath = `/cosmira/soda/blob/${revision}/docs/rules/`;
+        const localRule = destination.origin === 'https://github.com' && destination.pathname.startsWith(rulePath) && destination.pathname.slice(rulePath.length).match(/^([a-z][a-z0-9_]*)\.md$/);
         if (localRule) {
           const section = destination.hash.slice(1).replace(/[^a-z0-9_-]/g, '');
           link.href = `#${localRule[1]}${section ? '/' + section : ''}`;
-        } else if (destination.origin === 'https://github.com' && destination.pathname === '/cosmira/soda/blob/master/docs/rules/README.md') {
+        } else if (destination.origin === 'https://github.com' && destination.pathname === rulePath + 'README.md') {
           link.href = 'rules.html';
         } else {
           link.href = destination.href;
@@ -232,7 +235,7 @@
       element('rule-id').hidden = true;
       element('share').hidden = true;
       element('rule-category').textContent = 'Rule details';
-      element('source').href = 'https://github.com/cosmira/soda/tree/master/docs/rules';
+      element('source').href = `https://github.com/cosmira/soda/tree/${revision}/docs/rules`;
       document.title = 'Soda — Rule documentation';
       state('Invalid rule address.', 'Choose a rule from the list to read its examples and configuration.');
       return;
@@ -244,10 +247,10 @@
     element('rule-id').textContent = id;
     element('rule-id').hidden = false;
     element('share').hidden = false;
-    element('rule-category').textContent = metadata?.category || 'Rule details';
+    element('rule-category').textContent = metadata ? [metadata.category, metadata.set === 'standard' ? 'Standard' : 'Opt-in', ...(metadata.research ? ['Research'] : [])].join(' · ') : 'Rule details';
     element('source').href = githubRoot + id + '.md';
     document.title = `${title} — Soda`;
-    state('Loading the rule…', 'Getting the current documentation from GitHub.', {loading: true});
+    state('Loading the rule…', 'Getting the versioned documentation from GitHub.', {loading: true});
     const timeout = setTimeout(() => controller.abort('timeout'), 12000);
     try {
       if (!window.marked || !window.DOMPurify) throw new Error('reader');
@@ -298,7 +301,7 @@
     event.preventDefault();
     const reading = document.body.classList.contains('is-reading');
     const target = reading ? panel : element('search');
-    target.tabIndex = -1;
+    if (reading) target.tabIndex = -1;
     target.focus({preventScroll: true});
     if (reading) window.scrollTo({top: 0, behavior: 'instant'});
   });

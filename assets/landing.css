@@ -45,6 +45,7 @@
     .terminal-footer { display: flex; justify-content: space-between; align-items: center; gap: 8px; border-top: 1px solid #ffffff19; padding-top: 8px; color: #bfb5a5; font-size: 10px; }
     .terminal-footer a { display: inline-flex; align-items: center; min-height: 28px; }
     .terminal-footer a:hover { color: var(--yellow); text-decoration: underline; text-underline-offset: 4px; }
+    .demo-caption a { text-decoration: underline; text-underline-offset: 3px; }
     .demo-caption { text-align: center; font-size: 11px; color: var(--lead); margin: 18px 0 0; }
     .hero-foot { display: flex; flex-wrap: wrap; gap: 25px; padding-top: 30px; margin-top: 43px; border-top: 1px solid #fff8e933; font-size: 11px; color: var(--lead); }
     .hero-foot span { display: inline-flex; align-items: center; gap: 7px; }
@@ -216,4 +217,32 @@
   .closing-strip { margin: 24px 8px 16px; }
   .strip-actions { margin-top: 12px; }
   .strip-library { min-height: 44px; }
+}
+
+.standards-example { padding: 24px 24px 70px; }
+.standards-heading { max-width: 720px; margin-bottom: 30px; }
+.standards-heading .eyebrow { color: var(--link); margin-bottom: 20px; }
+.standards-heading .eyebrow::before { background: var(--link); }
+.standards-heading p { max-width: 62ch; color: var(--muted); font-size: 15px; line-height: 1.85; margin: 22px 0 0; }
+.standards-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.standards-card { min-width: 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--surface); }
+.standards-file { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 16px 20px; border-bottom: 1px solid var(--line); font: 11px/1.6 var(--mono); }
+.standards-file span { color: var(--muted); }
+.standards-card pre { margin: 0; padding: 22px 20px; overflow-x: auto; font: 12px/1.85 var(--mono); }
+.standards-finding, .standards-config { border-top: 1px solid var(--line); padding: 20px; }
+.standards-finding > code { color: var(--link); font: 13px/1.7 var(--mono); }
+.standards-card p { color: var(--muted); font-size: 13px; line-height: 1.8; margin: 12px 0 0; }
+.standards-config p:first-child { margin-top: 0; }
+.standards-config p code { color: var(--ink); font: .9em/1.8 var(--mono); overflow-wrap: anywhere; }
+.standards-card .text-link { margin-top: 10px; font-size: 13px; }
+.standards-card .text-link svg { width: 16px; height: 16px; }
+.terminal .result-note { font: inherit; white-space: pre-wrap; overflow-wrap: anywhere; max-width: none; }
+@media (max-width: 800px) {
+  .standards-example { padding: 10px 12px 50px; }
+  .standards-cards { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .standards-example { padding: 8px 8px 42px; }
+  .standards-card pre { font-size: 11px; padding: 18px 16px; }
+  .standards-file, .standards-finding, .standards-config { padding-inline: 16px; }
 }

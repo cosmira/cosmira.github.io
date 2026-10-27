@@ -1,23 +1,44 @@
 (() => {
   const scene = document.querySelector('.genie-story');
   const motion = scene.querySelector('.genie-motion');
-  const papers = scene.querySelectorAll('.genie-paper');
+  const papers = [...scene.querySelectorAll('.genie-paper')];
+  const pile = scene.querySelector('.genie-pile-front');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const unchecked = ['issue', 'unchecked', 'issue'];
+  let generated = 0;
   let timer;
-  let started = false;
 
-  if (reducedMotion.matches) papers.forEach(paper => paper.classList.add('is-good'));
-  papers.forEach(paper => paper.addEventListener('animationiteration', () => {
-    paper.classList.toggle('is-good', scene.classList.contains('is-guarded'));
-  }));
+  function emit(paper) {
+    paper.dataset.quality = scene.classList.contains('is-guarded') ? 'checked' : unchecked[generated++ % unchecked.length];
+  }
 
   function sync() {
     clearInterval(timer);
-    if (scene.classList.contains('is-visible') && !scene.classList.contains('is-paused') && !reducedMotion.matches) {
-      timer = setInterval(() => scene.classList.toggle('is-guarded'), 3000);
-    }
+    const running = scene.classList.contains('is-visible') && !scene.classList.contains('is-paused') && !reducedMotion.matches;
+    scene.getAnimations({subtree: true}).forEach(animation => {
+      if (animation.playState === 'finished') return;
+      if (!running) animation.pause();
+      else if (animation.playState === 'paused') animation.play();
+    });
+    if (running) timer = setInterval(() => scene.classList.toggle('is-guarded'), 8000);
   }
 
+  function staticResult() {
+    scene.classList.add('is-guarded');
+    papers.forEach(paper => { paper.dataset.quality = 'checked'; });
+    pile.dataset.quality = 'checked';
+  }
+
+  scene.classList.toggle('is-guarded', reducedMotion.matches);
+  papers.forEach(paper => {
+    emit(paper);
+    paper.addEventListener('animationiteration', () => {
+      pile.dataset.quality = paper.dataset.quality;
+      emit(paper);
+    });
+  });
+  pile.dataset.quality = reducedMotion.matches ? 'checked' : 'unchecked';
+  if (reducedMotion.matches) staticResult();
   motion.hidden = false;
   motion.addEventListener('click', () => {
     const paused = scene.classList.toggle('is-paused');
@@ -26,19 +47,11 @@
     sync();
   });
   reducedMotion.addEventListener('change', () => {
-    if (reducedMotion.matches) {
-      scene.classList.add('is-guarded');
-      papers.forEach(paper => paper.classList.add('is-good'));
-    }
+    if (reducedMotion.matches) staticResult();
     sync();
   });
   const observer = new IntersectionObserver(([entry]) => {
     scene.classList.toggle('is-visible', entry.isIntersecting);
-    if (entry.isIntersecting && !started && !reducedMotion.matches) {
-      scene.classList.remove('is-guarded');
-      papers.forEach(paper => paper.classList.remove('is-good'));
-      started = true;
-    }
     sync();
   }, {threshold: .3});
   observer.observe(scene.querySelector('.genie-scene'));
