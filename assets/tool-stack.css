@@ -22,10 +22,11 @@
 .workflow-commands { padding: 13px 10px 0; }
 .workflow-command { display: block; width: 100%; min-width: 0; text-align: left; color: #f1ebdf; background: transparent; padding: 12px; border: 0; border-left: 2px solid transparent; border-radius: 0 7px 7px 0; }
 .workflow-tool { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #c4bcad; font-size: 12px; font-weight: 550; margin-bottom: 6px; }
-.workflow-tool svg { width: 16px; height: 16px; opacity: .45; }
+.workflow-tool svg { width: 16px; height: 16px; margin-left: auto; opacity: .45; }
+.workflow-badge { padding: 3px 6px; border-radius: 4px; background: var(--red); color: var(--cream); font-size: 10px; font-weight: 650; line-height: 1; }
 .workflow-command code { display: block; overflow-x: auto; padding-bottom: 3px; white-space: nowrap; font: 11px/1.8 var(--mono); }
 .workflow-command:hover { background: #ffffff09; }
-.workflow-command:hover .workflow-tool { text-decoration: underline; text-underline-offset: 4px; }
+.workflow-command:hover .workflow-tool-name { text-decoration: underline; text-underline-offset: 4px; }
 .workflow-command:focus-visible { outline-color: var(--yellow); outline-offset: -3px; }
 .workflow-command[aria-selected="true"] { background: #ffffff09; border-left-color: var(--yellow); }
 .workflow-command[aria-selected="true"] .workflow-tool { color: var(--yellow); }
