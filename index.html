@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#201e1b" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="A little fizz for your PHP. Soda catches complexity, oversized classes, and naming problems before your next code review.">
+  <title>Soda — Good code. Great taste.</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='20' fill='%23f2d66d'/%3E%3Ccircle cx='25' cy='36' r='12' fill='%23be3528'/%3E%3Ccircle cx='43' cy='20' r='7' fill='%23be3528'/%3E%3Ccircle cx='45' cy='43' r='5' fill='%23be3528'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/landing.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/tool-stack.css">
+  <link rel="stylesheet" href="assets/agent-loop.css">
+  <script src="assets/tool-stack.js" defer></script>
+  <script src="assets/agent-loop.js" defer></script>
+  <link rel="stylesheet" href="assets/genie.css">
+  <script src="assets/genie.js" defer></script>
+</head>
+<body>
+  <svg class="icons" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="external" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M15 4H6a2 2 0 0 0-2 2v9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.6c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></symbol>
+    <symbol id="warning" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v6m0 3v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  </defs></svg>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar wrap">
+    <a class="brand" href="./" aria-label="Soda home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-name">soda</span></a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="rules.html">Rules</a>
+      <a class="nav-start" href="./#install">Install</a>
+      <a class="github" href="https://github.com/cosmira/soda"><svg aria-hidden="true"><use href="#github"/></svg> GitHub</a>
+    </nav>
+  </header>
+  <main id="main" class="wrap">
+    <div class="hero-frame">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="bubble bubble-one" aria-hidden="true"></div><div class="bubble bubble-two" aria-hidden="true"></div><div class="bubble bubble-three" aria-hidden="true"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">A fresh take on PHP quality</div>
+          <h1 id="hero-title">Good code.<br>Great <span>taste.</span></h1>
+          <p>Catch complexity, oversized classes and naming issues before review. Give your team and your AI agent the same clear standards.</p>
+          <div class="hero-install" id="install" aria-label="Install and run Soda">
+            <ol class="steps"><li><div class="step-title">Add to your project</div><div class="copy-row"><code>composer require --dev cosmira/soda</code><button class="copy" type="button" aria-label="Copy install command" hidden><svg aria-hidden="true"><use href="#copy"/></svg></button></div></li><li><div class="step-title">Run your first check</div><div class="copy-row"><code>vendor/bin/soda quality src/</code><button class="copy" type="button" aria-label="Copy quality check command" hidden><svg aria-hidden="true"><use href="#copy"/></svg></button></div></li></ol>
+            <p class="install-note">Standard rules. No configuration needed.</p>
+          </div>
+        </div>
+        <div class="demo-wrap">
+          <div class="demo" data-active="before" role="group" aria-label="Interactive example: simplify a boolean ternary">
+            <div class="demo-top"><span class="demo-title"><svg aria-hidden="true"><use href="#code"/></svg> A little less complicated.</span><span class="demo-label">Interactive example</span></div>
+            <div class="demo-toolbar"><span class="filename">Product.php<span class="file-detail"> · excerpt</span></span><div class="switch" role="group" aria-label="Compare code versions" hidden><button type="button" aria-pressed="true" data-version="before">Before</button><button type="button" aria-pressed="false" data-version="after">After</button></div></div>
+            <pre class="source" aria-label="PHP code example"><code><span data-example="before"><span class="line" data-line="1"><span class="keyword">public function</span> <span class="method">isAvailable</span>(): <span class="keyword">bool</span></span><span class="line" data-line="2">{</span><span class="line" data-line="3">    <span class="keyword">return</span> $this-&gt;stock &gt; <span class="keyword">0</span></span><span class="line" data-line="4">        <span class="redundant">? true : false</span>;</span><span class="line" data-line="5">}</span></span><span data-example="after" aria-hidden="true" inert><span class="line" data-line="1"><span class="keyword">public function</span> <span class="method">isAvailable</span>(): <span class="keyword">bool</span></span><span class="line" data-line="2">{</span><span class="line" data-line="3">    <span class="keyword">return</span> $this-&gt;stock &gt; <span class="keyword">0</span>;</span><span class="line" data-line="4">}</span></span></code></pre>
+            <div class="terminal">
+              <p class="command"><span class="prompt" aria-hidden="true">❯</span> vendor/bin/soda quality src/</p>
+              <div id="demo-result" aria-live="polite" aria-atomic="true"><div data-example="before"><div class="result"><svg aria-hidden="true"><use href="#warning"/></svg><span>1 unnecessary decision.</span></div><p class="result-note">Already a boolean.<br>No extra decision needed.</p></div><div data-example="after" aria-hidden="true" inert><div class="result good"><svg aria-hidden="true"><use href="#check"/></svg><span>Clearer code. Same result.</span></div><p class="result-note">No unnecessary ternary.<br>This rule passes.</p></div></div>
+              <div class="terminal-footer"><a href="rules.html#no_unneeded_ternary" aria-label="Read the unneeded ternary rule">no_unneeded_ternary →</a><span id="exit-status">exit 1</span></div>
+            </div>
+          </div>
+          <p class="demo-caption">Same intention. A little more clarity.</p>
+        </div>
+      </div>
+      <div class="hero-foot"><span><svg aria-hidden="true"><use href="#check"/></svg> PHP 8.2+</span><span><svg aria-hidden="true"><use href="#check"/></svg> Open source · MIT</span><span><svg aria-hidden="true"><use href="#check"/></svg> Ready for CI</span></div>
+    </section>
+    </div>
+    <section class="agent-story" id="agent-loop" aria-labelledby="agent-title">
+      <div class="agent-heading">
+        <div class="eyebrow">A feedback loop for your AI agent</div>
+        <h2 id="agent-title">Looks good.<br><span>Now check it.</span></h2>
+        <p>A first draft can look ready. Give your agent a repeatable way to improve it, with your standards in every iteration.</p>
+      </div>
+      <div class="agent-loop" aria-label="Explore the agent and Soda feedback loop">
+        <div class="loop-map">
+        <div class="loop-steps" role="tablist" aria-label="Steps clockwise: agent writes, Soda checks, agent fixes, Soda rechecks" hidden>
+          <svg class="loop-orbit" viewBox="0 0 400 400" aria-hidden="true"><defs>
+            <marker id="loop-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="m2 1 4 4-4 4"/></marker>
+            <marker id="loop-arrow-active" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="m2 1 4 4-4 4"/></marker>
+          </defs>
+            <path class="loop-route is-active" pathLength="100" d="M88 88 A158 158 0 0 1 200 42 A158 158 0 0 1 312 88"/>
+            <path class="loop-route" pathLength="100" d="M312 88 A158 158 0 0 1 358 200 A158 158 0 0 1 312 312"/>
+            <path class="loop-route" pathLength="100" d="M312 312 A158 158 0 0 1 200 358 A158 158 0 0 1 88 312"/>
+            <path class="loop-route" pathLength="100" d="M88 312 A158 158 0 0 1 42 200 A158 158 0 0 1 88 88"/>
+          </svg>
+          <div class="loop-center" aria-hidden="true"><span>Your standards</span><strong>In every<br>iteration.</strong><i></i><i></i><i></i></div>
+          <button type="button" role="tab" id="loop-tab-draft" aria-controls="loop-draft" aria-selected="true" tabindex="0"><span class="loop-step-number" aria-hidden="true">01</span><span>Agent writes</span></button>
+          <button type="button" role="tab" id="loop-tab-findings" aria-controls="loop-findings" aria-selected="false" tabindex="-1"><span class="loop-step-number" aria-hidden="true">02</span><span>Soda checks</span></button>
+          <button type="button" role="tab" id="loop-tab-revision" aria-controls="loop-revision" aria-selected="false" tabindex="-1"><span class="loop-step-number" aria-hidden="true">03</span><span>Agent fixes</span></button>
+          <button type="button" role="tab" id="loop-tab-verified" aria-controls="loop-verified" aria-selected="false" tabindex="-1"><span class="loop-step-number" aria-hidden="true">04</span><span>Soda rechecks</span></button>
+        </div>
+        </div>
+        <div class="loop-workbench">
+          <div class="loop-panels">
+            <div class="loop-panel" id="loop-draft" role="tabpanel" aria-labelledby="loop-tab-draft" tabindex="0">
+              <div class="loop-editor"><div class="loop-file"><span>OrderTotal.php <span class="loop-excerpt">· excerpt</span></span><span class="loop-badge"><abbr title="Looks Good To Me">LGTM?</abbr></span></div>
+                <pre aria-label="Agent draft PHP code"><code><span class="loop-line" data-number="1"><span class="keyword">function</span> <span class="method">total</span>(<span class="keyword">int</span> $amount, <span class="keyword">int</span> $fee): <span class="keyword">int</span></span><span class="loop-line" data-number="2">{</span><span class="loop-line" data-number="3">    $amount += $fee;</span><span class="loop-line" data-number="4">    $total = <span class="method">max</span>(<span class="keyword">0</span>, $amount);</span><span class="loop-line" data-number="5"> </span><span class="loop-line" data-number="6">    <span class="keyword">return</span> $total;</span><span class="loop-line" data-number="7">}</span></code></pre>
+              </div>
+            </div>
+            <div class="loop-panel" id="loop-findings" role="tabpanel" aria-labelledby="loop-tab-findings" tabindex="0" aria-hidden="true" inert>
+              <div class="loop-editor"><div class="loop-file"><span>OrderTotal.php <span class="loop-excerpt">· excerpt</span></span><span class="loop-badge">2 findings</span></div>
+                <pre aria-label="PHP code annotated with two Soda findings"><code><span class="loop-line" data-number="1"><span class="keyword">function</span> <span class="method">total</span>(<span class="keyword">int</span> $amount, <span class="keyword">int</span> $fee): <span class="keyword">int</span></span><span class="loop-line" data-number="2">{</span><span class="loop-line loop-line-issue" data-number="3">    $amount += $fee;</span><span class="loop-annotation"><a href="rules.html#no_reassigned_parameters" aria-label="Parameter reassigned: read the Soda rule"><svg aria-hidden="true"><use href="#warning"/></svg>Parameter reassigned<svg aria-hidden="true"><use href="#arrow"/></svg></a></span><span class="loop-line loop-line-issue" data-number="4">    $total = <span class="method">max</span>(<span class="keyword">0</span>, $amount);</span><span class="loop-line" data-number="5"> </span><span class="loop-line loop-line-issue" data-number="6">    <span class="keyword">return</span> $total;</span><span class="loop-annotation"><a href="rules.html#no_temporary_return_variable" aria-label="Return directly: read the Soda rule"><svg aria-hidden="true"><use href="#warning"/></svg>Return directly<svg aria-hidden="true"><use href="#arrow"/></svg></a></span><span class="loop-line" data-number="7">}</span></code></pre>
+              </div>
+            </div>
+            <div class="loop-panel" id="loop-revision" role="tabpanel" aria-labelledby="loop-tab-revision" tabindex="0" aria-hidden="true" inert>
+              <div class="loop-editor"><div class="loop-file"><span>OrderTotal.php <span class="loop-excerpt">· excerpt</span></span><span class="loop-badge">Revised</span></div>
+                <pre aria-label="PHP diff showing the agent’s revision"><code><span class="loop-line" data-number="1"><span class="keyword">function</span> <span class="method">total</span>(<span class="keyword">int</span> $amount, <span class="keyword">int</span> $fee): <span class="keyword">int</span></span><span class="loop-line" data-number="2">{</span><span class="loop-line loop-line-removed" data-number="−"><del>    $amount += $fee;</del></span><span class="loop-line loop-line-removed" data-number="−"><del>    $total = <span class="method">max</span>(<span class="keyword">0</span>, $amount);</del></span><span class="loop-line loop-line-removed" data-number="−"><del>    <span class="keyword">return</span> $total;</del></span><span class="loop-line loop-line-fixed" data-number="+">    <span class="keyword">return</span> <span class="method">max</span>(<span class="keyword">0</span>, $amount + $fee);</span><span class="loop-line" data-number="4">}</span></code></pre>
+              </div>
+            </div>
+            <div class="loop-panel" id="loop-verified" role="tabpanel" aria-labelledby="loop-tab-verified" tabindex="0" aria-hidden="true" inert>
+              <div class="loop-editor"><div class="loop-file"><span>OrderTotal.php <span class="loop-excerpt">· excerpt</span></span><span class="loop-badge">2 checks pass</span></div>
+                <pre aria-label="Revised PHP code; both illustrated checks pass"><code><span class="loop-line" data-number="1"><span class="keyword">function</span> <span class="method">total</span>(<span class="keyword">int</span> $amount, <span class="keyword">int</span> $fee): <span class="keyword">int</span></span><span class="loop-line" data-number="2">{</span><span class="loop-line loop-line-fixed" data-number="3">    <span class="keyword">return</span> <span class="method">max</span>(<span class="keyword">0</span>, $amount + $fee);</span><span class="loop-line" data-number="4">}</span></code></pre>
+                <div class="loop-checks"><a href="rules.html#no_reassigned_parameters"><svg aria-hidden="true"><use href="#check"/></svg>Input unchanged</a><a href="rules.html#no_temporary_return_variable"><svg aria-hidden="true"><use href="#check"/></svg>Direct return</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="loop-controls" hidden><span class="loop-example-label">Example · 2 rules</span><span class="loop-progress" role="status" aria-live="polite" aria-atomic="true">Agent draft</span><button class="loop-next" type="button">Run Soda <svg aria-hidden="true"><use href="#arrow"/></svg></button></div>
+        </div>
+      </div>
+
+    </section>
+    <section class="review-story" id="why" aria-labelledby="why-title">
+      <div class="review-lead">
+        <div class="eyebrow">Standards for every iteration</div>
+        <h2 id="why-title">Save the review<br>for the <span>hard parts.</span></h2>
+        <p>An agent can write the change. Your team still decides what good code looks like. Soda turns those expectations into findings you can feed back to the agent.</p>
+        <p>Ask the agent to address the findings, rerun Soda, and repeat before opening a pull request. Keep your review focused on behavior, design decisions and tradeoffs.</p>
+      </div>
+      <div class="review-questions" aria-label="Turn common review feedback into a quality check">
+        <div class="review-label"><span>Sound familiar?</span><span>There’s a check for that.</span></div>
+        <a class="review-question" href="rules.html#max_method_length"><span class="review-number" aria-hidden="true">01</span><div><h3>“Could this method<br>do a little less?”</h3><span class="review-rule">Method length <svg aria-hidden="true"><use href="#arrow"/></svg></span></div></a>
+        <a class="review-question" href="rules.html#no_dumpster_suffixes"><span class="review-number" aria-hidden="true">02</span><div><h3>“What does ‘Manager’<br>actually tell us?”</h3><span class="review-rule">Expressive names <svg aria-hidden="true"><use href="#arrow"/></svg></span></div></a>
+        <a class="review-question" href="rules.html#no_unneeded_ternary"><span class="review-number" aria-hidden="true">03</span><div><h3>“Do we need<br>another decision here?”</h3><span class="review-rule">Unnecessary ternaries <svg aria-hidden="true"><use href="#arrow"/></svg></span></div></a>
+      </div>
+    </section>
+    <section class="tool-stack" id="together" aria-labelledby="stack-title">
+      <div class="stack-heading"><div class="eyebrow">Build on what already works</div><h2 id="stack-title">Keep your toolkit.<br>Add a little taste.</h2></div>
+      <div class="stack-body">
+        <div class="stack-workflow" role="group" aria-label="Example CI checks, not a live run">
+          <div class="workflow-heading"><span>One pull request. Several perspectives.</span><span class="workflow-label">Choose a tool</span></div>
+          <div class="workflow-commands" role="tablist" aria-label="Explore each tool’s role" aria-orientation="vertical">
+            <button class="workflow-command" type="button" role="tab" id="tab-pint" aria-label="Laravel Pint" aria-controls="panel-pint" aria-selected="false" tabindex="-1" data-tool="pint"><span class="workflow-tool">Laravel Pint<svg aria-hidden="true"><use href="#arrow"/></svg></span><code>vendor/bin/pint --test</code></button>
+            <button class="workflow-command" type="button" role="tab" id="tab-rector" aria-label="Rector" aria-controls="panel-rector" aria-selected="false" tabindex="-1" data-tool="rector"><span class="workflow-tool">Rector<svg aria-hidden="true"><use href="#arrow"/></svg></span><code>vendor/bin/rector process src/ --dry-run</code></button>
+            <button class="workflow-command" type="button" role="tab" id="tab-phpstan" aria-label="PHPStan" aria-controls="panel-phpstan" aria-selected="false" tabindex="-1" data-tool="phpstan"><span class="workflow-tool">PHPStan<svg aria-hidden="true"><use href="#arrow"/></svg></span><code>vendor/bin/phpstan analyse src/</code></button>
+            <button class="workflow-command" type="button" role="tab" id="tab-soda" aria-label="Soda" aria-controls="panel-soda" aria-selected="true" data-tool="soda"><span class="workflow-tool">Soda<svg aria-hidden="true"><use href="#arrow"/></svg></span><code>vendor/bin/soda quality src/</code></button>
+            <button class="workflow-command" type="button" role="tab" id="tab-phpunit" aria-label="PHPUnit" aria-controls="panel-phpunit" aria-selected="false" tabindex="-1" data-tool="phpunit"><span class="workflow-tool">PHPUnit<svg aria-hidden="true"><use href="#arrow"/></svg></span><code>vendor/bin/phpunit</code></button>
+          </div>
+          <p class="workflow-note">Example CI commands. Use your project’s paths and configuration.</p>
+        </div>
+        <div class="stack-panels">
+          <div class="stack-panel" id="panel-pint" role="tabpanel" aria-labelledby="tab-pint" tabindex="0"><div class="stack-kicker">Laravel Pint / Code style</div><h3>A consistent way to write PHP.</h3><p>Keep formatting consistent with your chosen code style. Pint handles details such as spacing, indentation and braces, so the team can focus on the change.</p><p class="stack-example"><span>For example</span>Bring differently formatted files into the same coding style.</p><a class="text-link" href="https://laravel.com/docs/pint">Explore Laravel Pint <svg aria-hidden="true"><use href="#external"/></svg></a></div>
+          <div class="stack-panel" id="panel-rector" role="tabpanel" aria-labelledby="tab-rector" tabindex="0"><div class="stack-kicker">Rector / Refactoring</div><h3>Keep your PHP moving forward.</h3><p>Automate supported refactorings and PHP upgrades with the rules you enable. Rector proposes code changes that your team can review and apply.</p><p class="stack-example"><span>For example</span>Replace a legacy pattern with its supported modern equivalent.</p><a class="text-link" href="https://getrector.com/documentation">Explore Rector <svg aria-hidden="true"><use href="#external"/></svg></a></div>
+          <div class="stack-panel" id="panel-phpstan" role="tabpanel" aria-labelledby="tab-phpstan" tabindex="0"><div class="stack-kicker">PHPStan / Static analysis</div><h3>Find bugs before runtime.</h3><p>Inspect types, method calls and other potential errors without running your application. PHPStan helps the team catch mistakes earlier in development.</p><p class="stack-example"><span>For example</span>Spot a call that passes a string where an integer is required.</p><a class="text-link" href="https://phpstan.org/">Explore PHPStan <svg aria-hidden="true"><use href="#external"/></svg></a></div>
+          <div class="stack-panel" id="panel-soda" role="tabpanel" aria-labelledby="tab-soda" tabindex="0"><div class="stack-kicker">Soda / Structure &amp; clarity</div><h3>Your team’s taste, made repeatable.</h3><p>Put expectations about structure, complexity and naming into checks your team can run locally and in CI.</p><p class="stack-example"><span>For example</span>A method can be well formatted and type-correct, yet still exceed your team’s length limit.</p><a class="text-link" href="rules.html">Find the checks that fit <svg aria-hidden="true"><use href="#arrow"/></svg></a></div>
+          <div class="stack-panel" id="panel-phpunit" role="tabpanel" aria-labelledby="tab-phpunit" tabindex="0"><div class="stack-kicker">PHPUnit / Tests &amp; behavior</div><h3>Check that the behavior holds.</h3><p>Run the tests your team writes to check expected results and catch regressions. PHPUnit executes your code and compares the outcomes with your assertions.</p><p class="stack-example"><span>For example</span>Verify that applying a discount produces the expected total, including edge cases.</p><a class="text-link" href="https://phpunit.de/documentation.html">Explore PHPUnit <svg aria-hidden="true"><use href="#external"/></svg></a></div>
+        </div>
+      </div>
+      <p class="stack-summary">Soda works alongside PHPStan, Laravel Pint, Rector and PHPUnit, adding another perspective to the checks your team already trusts.</p>
+    </section>
+    <div class="rule-index-strip closing-strip" aria-label="Try Soda or explore its rules"><p><strong>126 checks. Each with a reason.</strong><span>Start with the standard set. Explore the rules that fit your team.</span></p><div class="strip-actions"><a class="strip-install" href="#install">Add to your project <svg aria-hidden="true"><use href="#arrow"/></svg></a><a class="strip-library" href="rules.html">Read the rules</a></div></div>
+    <section class="genie-story is-guarded" id="a-little-magic" aria-labelledby="genie-title">
+      <div class="genie-copy">
+        <div class="eyebrow">A little magic. A lot of code.</div>
+        <h2 id="genie-title">Endless output.<br><span>Your standards.</span></h2>
+        <p>The genie never stops generating. Soda’s cuffs keep the output accountable to your team’s limits on structure, naming and complexity.</p>
+        <div class="genie-controls"><div class="genie-status" aria-hidden="true"><span class="genie-output-bad">Unchecked output</span><span class="genie-output-good">Soda standards on</span></div><button class="genie-motion" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg><span>Pause animation</span></button></div>
+      </div>
+      <figure class="genie-scene">
+        <svg class="genie-art" viewBox="0 0 600 440" role="img" aria-labelledby="genie-art-title genie-art-desc">
+          <title id="genie-art-title">A tireless AI genie, wearing Soda cuffs</title>
+          <desc id="genie-art-desc">The scene repeats: without cuffs, the genie generates tangled, repetitive code. Golden Soda cuffs settle around its wrists and the pages become shorter and clearer, with green check marks. The cuffs lift off and tangled code returns. Use the pause button to stop the animation.</desc>
+          <defs>
+            <linearGradient id="genie-skin-warm" x1=".15" y1="0" x2=".85" y2="1"><stop stop-color="#cb503a"/><stop offset=".55" stop-color="#ba4130"/><stop offset="1" stop-color="#ae392b"/></linearGradient>
+            <linearGradient id="genie-cuff-metal" x1="0" y1="0" x2="1" y2=".25"><stop stop-color="#c69a45"/><stop offset=".22" stop-color="#f7df8b"/><stop offset=".52" stop-color="#eed27b"/><stop offset=".82" stop-color="#c1943f"/><stop offset="1" stop-color="#e0be66"/></linearGradient>
+            <symbol id="genie-spark" viewBox="0 0 24 24"><path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12C11 16 8 13 0 12 8 11 11 8 12 0Z"/></symbol>
+            <symbol id="genie-sheet" viewBox="0 0 104 78">
+              <path class="genie-paper-face" d="M6 1h76l16 16v59H6Z"/><path class="genie-paper-fold" d="M82 1v16h16"/>
+              <g class="genie-paper-code"><path d="m21 27-5 5 5 5m10-10 5 5-5 5m8-5h28M21 43h49M29 51h41M37 59h33"/><path class="genie-paper-repeat" d="M39 39h31M47 47h23M55 55h15"/></g>
+            </symbol>
+            <symbol id="genie-warning-icon" viewBox="0 0 104 78"><circle class="genie-paper-warning" cx="84" cy="60" r="7"/><path class="genie-paper-warning-mark" d="M84 56v4m0 3v.1"/></symbol>
+            <symbol id="genie-pass-icon" viewBox="0 0 104 78"><circle class="genie-paper-pass" cx="84" cy="60" r="7"/><path class="genie-paper-pass-mark" d="m81 60 2 2 4-5"/></symbol>
+          </defs>
+          <circle class="genie-orbit" cx="300" cy="214" r="165"/>
+          <path class="genie-ground" d="M173 419h370"/>
+          <g class="genie-paper-pile" aria-hidden="true">
+            <g class="genie-output-bad"><use href="#genie-sheet" x="448" y="329" width="104" height="78" transform="rotate(12 500 368)"/><use href="#genie-sheet" x="423" y="325" width="104" height="78" transform="rotate(-9 475 364)"/><use href="#genie-sheet" x="435" y="316" width="104" height="78" transform="rotate(4 487 355)"/></g>
+            <g class="genie-output-bad"><use href="#genie-warning-icon" x="448" y="329" width="104" height="78" transform="rotate(12 500 368)"/><use href="#genie-warning-icon" x="423" y="325" width="104" height="78" transform="rotate(-9 475 364)"/><use href="#genie-warning-icon" x="435" y="316" width="104" height="78" transform="rotate(4 487 355)"/></g>
+          </g>
+          <g class="genie-stream" aria-hidden="true">
+            <g class="genie-paper genie-paper-one"><use href="#genie-sheet" x="429" y="129" width="104" height="78"/><use class="genie-icon-bad" href="#genie-warning-icon" x="429" y="129" width="104" height="78"/><use class="genie-icon-good" href="#genie-pass-icon" x="429" y="129" width="104" height="78"/></g>
+            <g class="genie-paper genie-paper-two"><use href="#genie-sheet" x="429" y="129" width="104" height="78"/><use class="genie-icon-bad" href="#genie-warning-icon" x="429" y="129" width="104" height="78"/><use class="genie-icon-good" href="#genie-pass-icon" x="429" y="129" width="104" height="78"/></g>
+            <g class="genie-paper genie-paper-three"><use href="#genie-sheet" x="429" y="129" width="104" height="78"/><use class="genie-icon-bad" href="#genie-warning-icon" x="429" y="129" width="104" height="78"/><use class="genie-icon-good" href="#genie-pass-icon" x="429" y="129" width="104" height="78"/></g>
+          </g>
+          <g class="genie-body">
+            <path class="genie-skin genie-torso" d="M278 161C264 164 258 169 248 169c-20-3-32 7-29 24 3 21 24 32 34 52 9 18 14 34 33 45 19 11 47 17 44 35-2 14-17 22-29 19-8-2-12-6-14-12-12 11-16 24-14 37 25 8 53-8 59-32 8-30-18-46-37-61 5-19 21-32 34-51 12-18 24-35 14-47-8-10-22-9-34-6l-15-9Z"/>
+            <path class="genie-shade" d="M345 171c15 10 9 28-3 45-14 20-28 32-35 53-3 12 0 17 14 27 20 15 28 31 16 46-8 10-24 16-36 12 17 1 29-7 29-20 0-19-28-23-44-34-14-9-21-23-26-41 14 17 29 17 38 0 9-19 8-32 18-51 10-20 22-23 29-37Z"/>
+            <path class="genie-light" d="M245 177c-11 2-14 9-12 17 3 9 9 13 18 20 11-8 23-10 37-6-13-13-22-22-43-31Z"/>
+            <path class="genie-light" d="M307 184c15-8 26-8 37-1-6 8-12 14-17 22-5-12-10-18-20-21Z"/>
+            <path class="genie-anatomy" d="M253 213c13-5 25-4 36 0m17-1c8-5 17-6 27-4M291 215l5 18"/>
+            <path class="genie-soft-line" d="M279 258c8 5 16 5 23 1m-3 46c8 6 18 8 24 15"/>
+            <path class="genie-skin" d="M295 361c-8-1-13 1-16 4 8 5 18 4 24 0Z"/>
+            <g class="genie-arm genie-arm-left">
+              <path class="genie-skin genie-arm-volume" d="M248 175c-12-6-22-2-30-11-8-10-11-22-19-30-6-6-17-2-19 5-1 8 7 25 12 35 12 25 25 41 43 39 10-1 17-18 13-38Z"/>
+              <path class="genie-shade" d="M190 149c7 17 19 34 30 38 9 3 17 1 25-3 0 15-4 25-12 27-17 1-30-16-40-37-3-7-7-17-3-25Z"/>
+              <path class="genie-light" d="M206 155c6 10 9 17 18 22-9 3-17-2-23-12Z"/>
+              <path class="genie-anatomy" d="M220 183c5 3 12 3 17 0"/>
+              <g class="genie-cuff genie-cuff-left"><g transform="rotate(-31 190 148)">
+                <path class="genie-gold" d="M171 136c0-4 8-7 19-7s19 3 19 7v23c0 5-9 8-19 8s-19-3-19-8Z"/>
+                <path class="genie-cuff-shadow" d="M201 132c5 1 8 2 8 5v22c0 4-4 6-9 7 4-11 3-23 1-34Z"/>
+                <path class="genie-cuff-shine" d="M176 140v18c2 2 3 3 5 3v-19Z"/>
+                <ellipse class="genie-cuff-rim" cx="190" cy="136" rx="19" ry="7"/>
+                <ellipse class="genie-cuff-inner" cx="190" cy="135" rx="13.5" ry="3.5"/>
+                <path class="genie-cuff-bottom" d="M172 158c9 7 27 8 36 0v4c-8 7-28 7-36 0Z"/>
+                <path class="genie-cuff-edge" d="M182 145c5 2 11 2 16 0"/>
+                <ellipse class="genie-cuff-bubble" cx="186" cy="151" rx="3.1" ry="3.1"/><ellipse class="genie-cuff-bubble" cx="195" cy="148" rx="2.1" ry="2.1"/><ellipse class="genie-cuff-bubble" cx="195" cy="156" rx="1.5" ry="1.5"/>
+              </g></g>
+              <path class="genie-skin" d="M182 146c-4-8-12-12-20-18-6-4-6-10-2-12 4-2 10 4 14 7-5-9-10-17-7-21 3-4 7-1 10 4l8 13c-2-9-6-20-1-22 6-3 8 6 10 13l3 13c2-5 5-11 10-9 5 3 0 12-2 19-2 7-8 11-7 19Z"/>
+              <path class="genie-shade" d="M172 130c7 2 14 3 20-1 5-4 7-10 11-13 2 6-3 13-5 19-2 5-2 9 0 14l-16-3c-2-8-6-12-10-16Z"/>
+              <path class="genie-finger" d="M177 123c5 3 7 7 8 11m9-11c-5 1-8 5-9 9"/>
+            </g>
+            <g class="genie-arm genie-arm-right">
+              <path class="genie-skin genie-arm-volume" d="M343 174c13-6 24-7 32-18l22-23c6-7 17-4 19 4 3 9-7 22-13 33-13 25-27 44-43 43-15 0-22-22-17-39Z"/>
+              <path class="genie-shade" d="M408 143c-4 16-15 36-27 46-9 7-18 8-27 4l6 19c18 2 32-18 45-41 7-12 14-22 3-28Z"/>
+              <path class="genie-light" d="M353 178c8-4 14-4 20-9l-8 13c-4 5-8 7-15 5Z"/>
+              <path class="genie-anatomy" d="M358 185c6 2 13 0 17-3"/>
+              <g class="genie-cuff genie-cuff-right"><g transform="rotate(32 410 148)">
+                <path class="genie-gold" d="M391 136c0-4 8-7 19-7s19 3 19 7v23c0 5-9 8-19 8s-19-3-19-8Z"/>
+                <path class="genie-cuff-shadow" d="M421 132c5 1 8 2 8 5v22c0 4-4 6-9 7 4-11 3-23 1-34Z"/>
+                <path class="genie-cuff-shine" d="M396 140v18c2 2 3 3 5 3v-19Z"/>
+                <ellipse class="genie-cuff-rim" cx="410" cy="136" rx="19" ry="7"/>
+                <ellipse class="genie-cuff-inner" cx="410" cy="135" rx="13.5" ry="3.5"/>
+                <path class="genie-cuff-bottom" d="M392 158c9 7 27 8 36 0v4c-8 7-28 7-36 0Z"/>
+                <path class="genie-cuff-edge" d="M402 145c5 2 11 2 16 0"/>
+                <path class="genie-cuff-word" d="M403 150c-4-2-7 2-3 3l2 1c3 2-1 4-4 2m9-6c-4 0-4 7 0 7s4-7 0-7Zm12-4v11m0-6c-5-4-7 5-3 6 2 1 3-1 3-3m8-4v7m0-6c-4-4-7 5-3 6 2 1 3-1 3-3"/>
+              </g></g>
+              <path class="genie-skin" d="M398 141c-3-8-4-15 0-22 3-5 8-7 11-3 2 3-2 8-2 11 5-5 8-11 12-17 3-5 8-5 10-1 2 4-5 13-8 18l9-5c6-3 10 1 7 5-2 3-9 6-15 9l7-1c6 0 8 5 3 8-4 3-13 3-19 6l-9 7Z"/>
+              <path class="genie-shade" d="M398 128c4 7 11 9 17 6 6-2 11-3 14-1-6 3-13 5-16 10l-9 10-8-10Z"/>
+              <path class="genie-finger" d="M407 127c-2 5-2 10 1 14m1-5c3-4 6-6 10-7"/>
+            </g>
+            <path class="genie-skin genie-neck" d="m282 143-5 22c-1 11 12 21 24 22 12 0 23-11 19-20l-7-20Z"/>
+            <path class="genie-shade" d="M285 151c6 10 18 13 31 8l4 12c-7 9-19 10-26 3-4-5-6-12-9-23Z"/>
+            <path class="genie-skin" d="M271 105c-7-3-13 2-12 9 1 9 8 14 15 12m56-21c7-4 13 0 12 8-1 8-6 12-13 12"/>
+            <path class="genie-ear-detail" d="M266 112c4-1 6 3 6 7m65-8c-4 0-6 4-6 8"/>
+            <path class="genie-skin genie-head" d="M270 101c-2-22 12-32 32-30 24 0 34 15 31 36-2 9 2 15 0 24-2 15-17 28-33 28-17 0-32-13-33-29-1-12 6-21 3-29Z"/>
+            <path class="genie-shade" d="M319 77c12 5 17 18 14 31-2 9 2 15 0 24-3 15-17 27-33 27-13 0-23-7-28-16 15 6 34 2 40-7 7-10 3-17 7-28 3-12 4-20 0-31Z"/>
+            <path class="genie-light" d="M279 86c5-8 21-10 30-4-12 0-20 4-24 13-4 8-8 11-11 14 3-8 1-16 5-23Z"/>
+            <path class="genie-cheek" d="M276 118c6-4 12-3 16 1-6 1-11 4-13 8Zm36 2c7-4 13-2 16 1l-8 7Z"/>
+            <path class="genie-hair genie-topknot" d="M286 76c-11-11-1-20 8-25 1 8 12 10 16 18 3 7-2 13-7 15Z"/>
+            <path class="genie-hair" d="M270 101c-3-12 0-22 8-27 7-5 16-6 24-3-8 3-12 8-19 9-5 2-6 13-13 21Zm48-24c11 7 15 16 14 27-4-3-7-7-8-13Z"/>
+            <path class="genie-hair-sheen" d="M292 71c-4-7 2-12 4-15 1 6 10 9 9 16-3-5-9-3-13-1Z"/>
+            <path class="genie-brow" d="M276 101c4-9 15-10 23-2l-1 5c-8-6-14-6-22-3Zm33-4c6-6 15-5 19 1l-1 4c-7-3-12-3-18-1Z"/>
+            <path class="genie-eye" d="M277 111c5-6 13-5 19 1-5 6-13 6-19-1Zm31-1c5-5 13-5 18 0-5 6-13 6-18 0Z"/>
+            <ellipse class="genie-pupil" cx="290" cy="111" rx="3.1" ry="4.5"/><ellipse class="genie-pupil" cx="319" cy="110" rx="3" ry="4.2"/>
+            <path class="genie-anatomy" d="M277 110c5-5 12-4 17 0m16-1c4-3 9-3 14 0"/>
+            <path class="genie-nose" d="M301 107c0 6-4 12-3 16 4 4 10 4 13 0l-4-3"/>
+            <path class="genie-nose-light" d="M302 111c1 4-1 7-2 10"/>
+            <path class="genie-mouth" d="M278 129c13 6 30 8 46-3-3 17-14 24-27 21-9-2-15-8-19-18Z"/>
+            <path class="genie-teeth" d="M282 132c12 4 24 3 37-3l-3 8c-10 4-22 4-30-1Z"/>
+            <path class="genie-lip" d="M291 145c6 3 14 3 20-1"/>
+            <path class="genie-hair genie-moustache" d="M301 128c-7-8-14 4-23-2l-3-3c0 11 13 13 26 7 11 6 23 3 25-7-9 8-17-3-25 5Z"/>
+            <path class="genie-hair" d="M291 150c7 3 14 3 20 0-1 9-5 15-10 19-3-8-7-11-10-19Z"/>
+            <path class="genie-beard-light" d="m301 155 1 7"/>
+            <path class="genie-earring" d="M338 119c9-1 10 15 2 17-7 2-12-6-7-12"/>
+          </g>
+          <g class="genie-lamp" stroke="#8d6938" stroke-width="1.15" stroke-linejoin="round" stroke-linecap="round">
+            <defs>
+              <linearGradient id="lamp-bowl" x1=".25" y1="0" x2=".65" y2="1"><stop stop-color="#ffedaa"/><stop offset=".35" stop-color="#e5b94c"/><stop offset=".75" stop-color="#d6a03d"/><stop offset="1" stop-color="#ae7131"/></linearGradient>
+              <linearGradient id="lamp-rim" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0b5"/><stop offset="1" stop-color="#d4a044"/></linearGradient>
+              <linearGradient id="lamp-handle" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e7c56b"/><stop offset="1" stop-color="#ae7131"/></linearGradient>
+            </defs>
+            <path fill="url(#lamp-handle)" fill-rule="evenodd" d="M249 376C238 366 223 370 220 380C215 394 231 404 245 397L253 389ZM243 382C235 376 228 378 227 384C226 391 235 394 242 389C244 387 245 384 243 382Z"/>
+            <path fill="url(#lamp-handle)" d="M273 404C276 409 274 412 269 413L262 415C259 416 260 419 264 419H297C301 419 303 417 299 415L290 412C287 411 286 408 289 404Z"/>
+            <path fill="url(#lamp-bowl)" d="M243 380C260 387 285 387 303 380C320 381 337 374 348 363C351 360 358 363 362 359C359 373 348 385 334 391C323 396 315 394 307 400C297 411 277 414 261 407C249 402 244 392 243 380Z"/>
+            <path fill="#a86b2c" stroke="none" opacity=".48" d="M248 391C265 407 289 407 306 395C312 391 324 392 334 388C325 395 315 395 307 400C297 411 277 414 261 407C255 404 251 398 248 391Z"/>
+            <path fill="none" stroke="#fff0b5" stroke-width="3.1" d="M252 390C264 397 279 398 291 394"/>
+            <path fill="none" stroke="#f6d880" stroke-width="2.1" d="M312 385C328 383 339 377 348 369"/>
+            <path fill="url(#lamp-rim)" d="M246 379C262 373 288 373 305 379C303 383 290 387 277 387C263 387 252 384 246 379Z"/>
+            <path fill="url(#lamp-rim)" d="M256 378C259 372 266 371 272 369C274 368 275 365 274 363H284C283 365 284 368 287 369C294 371 299 374 301 378C288 382 270 383 256 378Z"/>
+            <path fill="none" stroke="#fff4c5" stroke-width="1.7" d="M261 376C268 372 273 373 276 370"/>
+            <path fill="url(#lamp-rim)" d="M274 363C271 360 274 356 279 356C284 356 287 360 284 363C281 365 277 365 274 363Z"/>
+            <path fill="none" stroke="#f8db8c" stroke-width="1.2" d="M266 415C274 416 287 416 295 415"/>
+            <path fill="#80522b" stroke-width="1.2" d="M349 363C352 362 356 363 360 360C359 364 356 366 353 366Z"/>
+          </g>
+          <g class="genie-sparks" fill="var(--yellow)" aria-hidden="true"><use href="#genie-spark" x="129" y="87" width="18" height="18"/><use href="#genie-spark" x="454" y="82" width="22" height="22"/><use href="#genie-spark" x="116" y="215" width="10" height="10"/></g>
+        </svg>
+      </figure>
+    </section>
+  </main>
+  <footer class="footer wrap"><a class="footer-note" href="./"><span class="brand-name">soda</span> <span>A little fizz for your PHP.</span></a><nav aria-label="Footer navigation"><a href="https://github.com/cosmira/soda">GitHub</a><a href="https://github.com/cosmira/soda/blob/master/docs/README.md">Docs</a><a href="https://github.com/cosmira/soda/blob/master/LICENSE" aria-label="MIT license">MIT</a></nav></footer>
+  <div class="toast" role="status" aria-live="polite" hidden></div>
+  <script>
+    (() => {
+      const buttons = document.querySelectorAll('[data-version]');
+      const demo = document.querySelector('.demo');
+      document.querySelector('.switch').hidden = false;
+      buttons.forEach(button => button.addEventListener('click', () => {
+        const version = button.dataset.version;
+        buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        demo.dataset.active = version;
+        demo.querySelectorAll('[data-example]').forEach(panel => {
+          const inactive = panel.dataset.example !== version;
+          panel.setAttribute('aria-hidden', String(inactive));
+          panel.inert = inactive;
+        });
+        document.querySelector('#exit-status').textContent = version === 'after' ? 'exit 0' : 'exit 1';
+      }));
+      const toast = document.querySelector('.toast');
+      let toastTimer;
+      document.querySelectorAll('.copy').forEach(button => {
+        button.hidden = false;
+        let resetTimer;
+        button.addEventListener('click', async () => {
+          const code = button.previousElementSibling;
+          clearTimeout(toastTimer);
+          try {
+            await navigator.clipboard.writeText(code.textContent);
+            clearTimeout(resetTimer);
+            button.dataset.copied = '';
+            button.querySelector('use').setAttribute('href', '#check');
+            toast.textContent = 'Command copied.';
+            resetTimer = setTimeout(() => {
+              delete button.dataset.copied;
+              button.querySelector('use').setAttribute('href', '#copy');
+            }, 2200);
+          } catch {
+            const selection = window.getSelection();
+            const range = document.createRange();
+            range.selectNodeContents(code);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            toast.textContent = 'Command selected. Press ⌘C or Ctrl+C to copy.';
+          }
+          toast.hidden = false;
+          toastTimer = setTimeout(() => { toast.hidden = true; }, 3500);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

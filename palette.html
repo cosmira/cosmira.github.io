@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:,">
+  <title>Soda — сравнение палитр</title>
+  <style>
+    :root { color-scheme: light; --bg: #f5f5f3; --fg: #252724; --secondary: #5f635d; --border: #d7dad3; --control: #fff; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--fg); }
+    button, input { font: inherit; }
+    .review { height: 100dvh; display: flex; flex-direction: column; }
+    header { padding: 18px 28px 14px; border-bottom: 1px solid var(--border); }
+    .toolbar { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 16px; }
+    h1 { margin: 0; font-size: 17px; font-weight: 650; letter-spacing: -.4px; }
+    h1 span { font-size: 12px; font-weight: 400; color: var(--secondary); margin-left: 10px; }
+    fieldset { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 0; padding: 0; border: 0; }
+    legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .choices { display: flex; flex-wrap: wrap; gap: 16px; }
+    label { position: relative; min-height: 38px; display: inline-flex; align-items: center; padding: 7px 12px; border: 1px solid var(--border); border-radius: 7px; cursor: pointer; font-size: 12px; }
+    label:has(input:checked) { background: var(--fg); border-color: var(--fg); color: var(--control); }
+    label:has(input:focus-visible) { outline: 3px solid #3876c5; outline-offset: 3px; }
+    input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .swatches { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; padding-top: 15px; }
+    .swatch { display: flex; gap: 8px; align-items: center; min-width: 0; }
+    .chip { width: 29px; height: 29px; border-radius: 8px; box-shadow: inset 0 0 0 1px #00000013; flex-shrink: 0; }
+    .swatch strong { display: block; font-size: 11px; font-weight: 550; }
+    .swatch code { display: block; font-size: 10px; color: var(--secondary); }
+    .metrics { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 11px; }
+    .metric { display: inline-flex; gap: 5px; align-items: baseline; }
+    .metric strong { font-variant-numeric: tabular-nums; font-weight: 650; }
+    .status { font-weight: 650; }
+    .fail .status { color: #9b2b24; }
+    .pass .status { color: #246239; }
+    .threshold { color: var(--secondary); }
+    iframe { flex: 1; width: 100%; min-height: 0; border: 0; background: var(--bg); }
+    .notice { margin: 12px 0 0; color: var(--secondary); font-size: 11px; }
+    @media (max-width: 720px) { header { padding: 14px; } .toolbar { gap: 12px; } .swatches { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; } .choices { gap: 8px; } .metrics { gap: 5px 16px; } }
+  </style>
+</head>
+<body>
+  <main class="review">
+    <header>
+      <div class="toolbar">
+        <h1>Soda <span>Цветовое исследование / 01</span></h1>
+        <div class="choices">
+          <fieldset><legend>Палитра</legend><label><input type="radio" name="palette" value="current">Предыдущая</label><label><input type="radio" name="palette" value="candidate" checked>Применённая · теплее и глубже</label></fieldset>
+          <fieldset><legend>Тема</legend><label><input type="radio" name="theme" value="light" checked>Светлая</label><label><input type="radio" name="theme" value="dark">Тёмная</label></fieldset>
+        </div>
+      </div>
+      <div class="swatches" aria-label="Оттенки выбранной палитры"></div>
+      <div class="metrics" aria-label="Измерения контраста" aria-live="polite"></div>
+      <p class="notice">Новая палитра применена к основной странице. Здесь можно сравнить её с предыдущей на том же макете. Показаны выбранные цветовые пары, а не полный аудит доступности.</p>
+    </header>
+    <iframe src="./index.html" title="Страница Soda с выбранной палитрой"></iframe>
+  </main>
+  <script>
+    (() => {
+      const palettes = {
+        current: {
+          light: {paper:'#f7f5ef',surface:'#fffcf5',ink:'#262820',muted:'#696b60',line:'#deded2',red:'#d53326',yellow:'#efd35a',cream:'#fff8e9',code:'#a3372b',green:'#28613e',lead:'#fff0e4',caption:'#ffecde',terminal:'#282b24',link:'#d53326'},
+          dark: {paper:'#1b1d19',surface:'#242720',ink:'#f4f2e9',muted:'#b5b9aa',line:'#42473b',red:'#b92f24',yellow:'#efd35a',cream:'#fff8e9',code:'#f3a494',green:'#b6d6a6',lead:'#fff0e4',caption:'#ffecde',terminal:'#282b24',link:'#f3a494'}
+        },
+        candidate: {
+          light: {paper:'#f7f4ec',surface:'#fffaf0',ink:'#2b2823',muted:'#6c655b',line:'#ddd6c8',red:'#be3528',yellow:'#f2d66d',cream:'#fff8e9',code:'#ac3b2b',green:'#3b6649',lead:'#fff1df',caption:'#fff1df',terminal:'#2b2923',link:'#be3528'},
+          dark: {paper:'#201e1b',surface:'#2a2722',ink:'#f4efe5',muted:'#bdb4a7',line:'#4a443b',red:'#9f3024',yellow:'#f1d374',cream:'#fff6e6',code:'#f0ac98',green:'#b3d1a5',lead:'#fcebd9',caption:'#fcebd9',terminal:'#25231e',link:'#f0ac98'}
+        }
+      };
+      const frame = document.querySelector('iframe');
+      let style;
+      const luminance = hex => hex.slice(1).match(/../g).map(x => parseInt(x,16)/255).map(x => x <= .04045 ? x/12.92 : ((x+.055)/1.055)**2.4).reduce((total,x,i) => total+x*[.2126,.7152,.0722][i],0);
+      const contrast = (a,b) => (Math.max(luminance(a),luminance(b))+.05)/(Math.min(luminance(a),luminance(b))+.05);
+      function update() {
+        const variant = document.querySelector('[name="palette"]:checked').value;
+        const theme = document.querySelector('[name="theme"]:checked').value;
+        const p = palettes[variant][theme];
+        document.querySelector('.swatches').innerHTML = [['red','Красный'],['yellow','Жёлтый'],['paper','Фон'],['surface','Поверхность'],['ink','Основной текст'],['muted','Вторичный текст']].map(([key,name]) => `<div class="swatch"><span class="chip" style="background:${p[key]}"></span><div><strong>${name}</strong><code>${p[key].toUpperCase()}</code></div></div>`).join('');
+        const pairs = [['Текст на красном',p.lead,p.red,4.5],['Мелкая подпись',p.caption,p.red,4.5],['Жёлтый заголовок',p.yellow,p.red,3],['Вторичный текст',p.muted,p.paper,4.5],['Текст кнопки','#29291e',p.yellow,4.5]];
+        document.querySelector('.metrics').innerHTML = pairs.map(([label,fg,bg,minimum]) => {
+          const ratio = contrast(fg,bg);
+          const pass = ratio >= minimum;
+          return `<span class="metric ${pass?'pass':'fail'}">${label} <strong>${ratio.toFixed(2)}:1</strong><span class="status">${pass?'✓':'ниже нормы'}</span><span class="threshold">/ ≥ ${minimum}:1</span></span>`;
+        }).join('');
+        if (!style) return;
+        const root = frame.contentDocument.documentElement;
+        root.style.colorScheme = theme;
+        Object.entries(p).forEach(([key,value]) => root.style.setProperty('--'+key,value));
+        const candidate = variant === 'candidate';
+        style.textContent = `
+          .hero { background: ${p.red}; }
+          .hero-copy > p, .hero-foot { color: ${p.lead}; }
+          .demo-caption { color: ${p.caption}; }
+          .terminal { background: ${p.terminal}; }
+          .install .text-link, .principle-head svg, .rule-link:hover { color: ${p.link}; }
+          .demo { border-color: ${theme==='dark'?'#fff8e933':'#fff8e9b3'}; }
+          .redundant { background: ${theme==='dark'?'#ffb3a314':'#d5332611'}; text-decoration-color: ${theme==='dark'?'#f3a49488':'#d5332677'}; }
+          ${candidate ? `
+            .hero-foot .aside { opacity: 1; }
+            .button:hover { background: #fae291; }
+            .button { color: #29291e; }
+            .command, .terminal { color: #f1ebdf; }
+            .prompt, .result-note { color: #c4bcad; }
+            .terminal-footer { color: #bfb5a5; }
+            .result.good { color: #bbd6a7; }
+            :focus-visible { outline-color: ${theme==='dark'?'#a9c7ef':'#1b62bd'}; }
+            .hero :focus-visible { outline-color: ${p.cream}; }
+            .demo :focus-visible { outline-color: ${p.ink}; }
+          ` : `
+            .hero-foot .aside { opacity: .8; }
+            .button:hover { background: #ffe77f; }
+            .command, .terminal { color: #eeeee1; }
+            .prompt { color: #b8c19c; }
+            .result-note { color: #bfc2b6; }
+            .terminal-footer { color: #aeb3a5; }
+            .result.good { color: #b8ddb2; }
+            :focus-visible, .hero :focus-visible, .demo :focus-visible { outline-color: #2878e3; }
+          `}
+        `;
+      }
+      frame.addEventListener('load', () => {
+        style = frame.contentDocument.createElement('style');
+        frame.contentDocument.head.append(style);
+        update();
+      });
+      document.querySelectorAll('input').forEach(input => input.addEventListener('change', update));
+      update();
+    })();
+  </script>
+</body>
+</html>
